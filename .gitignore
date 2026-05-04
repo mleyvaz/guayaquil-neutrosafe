@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+.DS_Store
+
+# Estado persistente del twin (sesión local, no subir)
+twin_state.json
+interventions_applied.jsonl
+audit_log.jsonl
+
+# Respuestas participativas locales (descargar antes de limpiar)
+participatory_responses.csv
+
+# Datos reales (no subir por licencias o PII)
+real_data/
+
+# Vault de Obsidian
+*.base
+Sin\ nombre*/
+
+# Jupyter
+.ipynb_checkpoints/
+MVP_fsQCA_original.ipynb
