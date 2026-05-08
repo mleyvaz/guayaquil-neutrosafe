@@ -12,8 +12,11 @@ audit_log.jsonl
 # Respuestas participativas locales (descargar antes de limpiar)
 participatory_responses.csv
 
-# Datos reales (no subir por licencias o PII)
-real_data/
+# Datos reales — CSVs procesados SÍ se incluyen (estadísticas públicas)
+# Excluir solo GeoTIFFs grandes y archivos crudos
+real_data/nightlight/*.tif
+real_data/nightlight/*.tif.gz
+real_data/raw/
 
 # Vault de Obsidian
 *.base

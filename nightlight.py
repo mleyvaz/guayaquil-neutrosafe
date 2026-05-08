@@ -22,7 +22,11 @@ Indicadores producidos:
 from __future__ import annotations
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from data_loader import DEMO_SECTORS
+
+HERE = Path(__file__).parent
+_REAL_NL_PATH = HERE / "real_data" / "nightlight_guayaquil_2023.csv"
 
 NIGHTLIGHT_INDICATORS = [
     "radiance_promedio_nW",
@@ -60,6 +64,17 @@ def _sector_type(sector: str) -> str:
         if sector in lst:
             return t
     return "periferia_urbana"
+
+
+def load_nightlight_data() -> pd.DataFrame:
+    """Carga datos reales NASA VIIRS si existen; sintéticos como fallback."""
+    if _REAL_NL_PATH.exists():
+        df = pd.read_csv(_REAL_NL_PATH, encoding="utf-8")
+        for col in NIGHTLIGHT_INDICATORS:
+            if col not in df.columns:
+                df[col] = 0.0
+        return df
+    return synthetic_nightlight()
 
 
 def synthetic_nightlight(seed: int = 7) -> pd.DataFrame:
@@ -144,7 +159,7 @@ def nightlight_to_tif(df: pd.DataFrame) -> pd.DataFrame:
             "I_indeterminacion_LUZ": round(I, 3),
             "F_proteccion_LUZ": round(F, 3),
             "regimen_LUZ": reg,
-            "tipo_zona": r["tipo_zona"],
+            "tipo_zona": r.get("tipo_zona", "real_data"),
         })
     return pd.DataFrame(out)
 

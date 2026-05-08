@@ -19,7 +19,11 @@ Indicadores:
 from __future__ import annotations
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from data_loader import DEMO_SECTORS
+
+HERE = Path(__file__).parent
+_REAL_VG_PATH = HERE / "real_data" / "femicidios_guayaquil.csv"
 
 GENDER_INDICATORS = [
     "tasa_feminicidio_100k",
@@ -31,6 +35,24 @@ GENDER_INDICATORS = [
     "femicidios_pendientes_sentencia",
     "victimas_protegidas_activas",
 ]
+
+
+def load_gender_data() -> pd.DataFrame:
+    """Carga datos reales si existen; sintéticos como fallback."""
+    if _REAL_VG_PATH.exists():
+        df = pd.read_csv(_REAL_VG_PATH, encoding="utf-8")
+        # Renombrar para compatibilidad con gender_risk_score()
+        rename = {
+            "femicidios_sin_sentencia": "femicidios_pendientes_sentencia",
+            "prog_prevencion_activos":  "prog_prevencion_activos",
+        }
+        df = df.rename(columns=rename)
+        # Asegurar columnas requeridas
+        for col in GENDER_INDICATORS:
+            if col not in df.columns:
+                df[col] = 0.5
+        return df
+    return synthetic_gender_data()
 
 
 def synthetic_gender_data(seed: int = 42) -> pd.DataFrame:

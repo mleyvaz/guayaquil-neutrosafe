@@ -70,8 +70,11 @@ def log_audit(action: str, user_purpose: str = "no_specified",
         "sector": sector,
         "payload_summary": (str(payload)[:200] if payload else None),
     }
-    with open(AUDIT_LOG, "a", encoding="utf-8") as f:
-        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    try:
+        with open(AUDIT_LOG, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except OSError:
+        pass  # read-only filesystem (Streamlit Cloud) — audit continues in-memory
     return entry
 
 
@@ -99,8 +102,11 @@ def read_audit_log(last_n: int = 50) -> list[dict]:
     """Return last N audit entries (public for transparency)."""
     if not AUDIT_LOG.exists():
         return []
-    with open(AUDIT_LOG, "r", encoding="utf-8") as f:
-        lines = f.readlines()
+    try:
+        with open(AUDIT_LOG, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+    except OSError:
+        return []
     entries = [json.loads(l) for l in lines if l.strip()]
     return entries[-last_n:]
 

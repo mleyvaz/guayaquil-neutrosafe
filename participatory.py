@@ -106,12 +106,15 @@ def save_response(
         row[ic] = round(p["I"], 2)
         row[fc] = round(p["F"], 2)
 
-    file_exists = PARTICIPATORY_PATH.exists()
-    with open(PARTICIPATORY_PATH, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_COLUMNS)
-        if not file_exists:
-            writer.writeheader()
-        writer.writerow(row)
+    try:
+        file_exists = PARTICIPATORY_PATH.exists()
+        with open(PARTICIPATORY_PATH, "a", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=CSV_COLUMNS)
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(row)
+    except OSError:
+        pass  # ephemeral filesystem — response stored in session state only
     return True
 
 

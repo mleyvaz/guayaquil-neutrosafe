@@ -280,13 +280,15 @@ class UrbanTwin:
             "snapshots": [s.to_dict() for s in self.snapshots],
             "interventions_applied": [i.to_dict() for i in self.interventions_applied],
         }
-        with open(TWIN_STATE_PATH, "w", encoding="utf-8") as f:
-            json.dump(state, f, ensure_ascii=False, indent=2)
-        # Append-only intervention log
-        if self.interventions_applied:
-            with open(INTERVENTIONS_LOG, "w", encoding="utf-8") as f:
-                for ia in self.interventions_applied:
-                    f.write(json.dumps(ia.to_dict(), ensure_ascii=False) + "\n")
+        try:
+            with open(TWIN_STATE_PATH, "w", encoding="utf-8") as f:
+                json.dump(state, f, ensure_ascii=False, indent=2)
+            if self.interventions_applied:
+                with open(INTERVENTIONS_LOG, "w", encoding="utf-8") as f:
+                    for ia in self.interventions_applied:
+                        f.write(json.dumps(ia.to_dict(), ensure_ascii=False) + "\n")
+        except OSError:
+            pass  # ephemeral filesystem — state lives in memory for this session
 
     def _load_state(self):
         if not TWIN_STATE_PATH.exists():

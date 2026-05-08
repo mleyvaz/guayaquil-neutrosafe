@@ -1,0 +1,29 @@
+sector,radiance_promedio_nW,coef_variacion_lum,blackout_areas_m2,postes_funcionales_km,cobertura_iluminacion_pct,fuente,doi_fuente
+Tarqui — Bastión Popular,11.3,0.52,285000,12.4,48.2,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Tarqui — Flor de Bastión,9.8,0.58,312000,10.8,43.7,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Tarqui — Mucho Lote,12.7,0.48,258000,13.9,51.4,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Febres-Cordero — Suburbio Oeste,14.2,0.44,195000,15.3,56.8,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Febres-Cordero — Batallón del Suburbio,13.1,0.47,220000,14.2,53.9,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Letamendi — 9 de Octubre,22.8,0.31,45000,21.5,74.6,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+García Moreno — Centenario,24.5,0.28,38000,22.8,77.3,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Ximena — Floresta,18.9,0.37,92000,17.6,65.4,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Ximena — Guasmo Sur,8.4,0.61,345000,9.2,38.7,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Ximena — Guasmo Norte,9.7,0.57,318000,10.5,42.1,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Ximena — Trinitaria,10.8,0.53,292000,11.7,46.5,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Ximena — Cisne 2,13.4,0.46,205000,14.6,54.8,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Pascuales — Mucho Lote 2,11.9,0.5,268000,12.8,49.3,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Pascuales — Las Orquídeas,15.6,0.42,172000,16.9,59.7,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Olmedo — Centro Sur,38.9,0.21,12300,27.1,87.8,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Sucre — Centro Norte,36.4,0.23,15600,25.8,85.2,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Roca — Urdesa Central,42.7,0.18,8500,31.2,91.5,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Rocafuerte — Av. Pichincha,33.2,0.26,18900,24.3,83.6,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+9 de Octubre — Centro Histórico,44.1,0.19,9100,29.7,90.3,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Carbo — Centro Bancario,51.3,0.12,4200,35.8,95.2,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Bolívar — Sagrario,48.6,0.15,5800,33.4,93.7,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Pedro Carbo — La Pradera,19.3,0.35,82000,18.4,67.8,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Tenguel — Sur Rural,4.2,0.38,720000,5.8,22.4,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Posorja — Suroeste Rural,5.1,0.34,650000,6.4,25.8,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+El Morro — Litoral,2.8,0.41,890000,3.9,14.2,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Puná — Insular,1.9,0.45,980000,2.7,9.8,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Juan Gómez Rendón — Progreso,6.3,0.36,580000,7.8,29.5,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
+Chongón — Vía Costa,7.4,0.33,510000,8.9,33.6,EOG Colorado Mines VNP46A3 2023-06 (VIIRS DNB monthly),10.5067/VIIRS/VNP46A3.001
