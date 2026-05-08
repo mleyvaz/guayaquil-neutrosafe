@@ -16,6 +16,7 @@ Para datos reales, ejecutar el notebook MVP con API key y reemplazar `data_claim
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Sequence, Iterable
 import pandas as pd
 import numpy as np
@@ -142,15 +143,58 @@ DEMO_CLAIMS_DATA = [
 
 
 def load_demo_claims() -> pd.DataFrame:
-    """Build claims dataframe from synthetic demo data."""
+    """
+    Carga datos N-fsQCA. Prioridad:
+    1. real_data/nfsqca_live.csv  (actualización automática diaria vía GitHub Actions)
+    2. Datos demo sintéticos basados en los 16 medios del MVP original
+    """
+    live_path = Path(__file__).parent / "real_data" / "nfsqca_live.csv"
+    if live_path.exists():
+        try:
+            df_live = pd.read_csv(live_path, encoding="utf-8")
+            # nfsqca_live.csv tiene formato largo (condicion, T, I, F)
+            # Convertir a formato ancho compatible con el pipeline existente
+            if "condicion" in df_live.columns and "T" in df_live.columns:
+                rows = []
+                for i, r in df_live.iterrows():
+                    row = {
+                        "case_id": f"live_{i}",
+                        "source": "live_feed",
+                        "confidence": 1.0 - float(r.get("I", 0.2)),
+                        OUTCOME_KEY: float(r.get("T", 0.5)),
+                    }
+                    for k in COND_KEYS:
+                        row[k] = float(r["T"]) if r["condicion"] == k else 0.0
+                    rows.append(row)
+                df = pd.DataFrame(rows)
+                df._is_live = True
+                return df
+        except Exception:
+            pass
+
+    # Fallback: datos demo sintéticos
     rows = []
     for c in DEMO_CLAIMS_DATA:
         row = {"case_id": c["case_id"], "source": c["source"],
                "confidence": c["confidence"], OUTCOME_KEY: c["outcome_y"]}
         for k in COND_KEYS:
-            row[k] = c["polarity"].get(k, 0.0)  # ausencia = 0
+            row[k] = c["polarity"].get(k, 0.0)
         rows.append(row)
     return pd.DataFrame(rows)
+
+
+def load_live_nfsqca_summary() -> pd.DataFrame | None:
+    """
+    Carga el resumen N-fsQCA en vivo (T, I, F por condición).
+    Retorna None si no hay datos en vivo disponibles.
+    """
+    live_path = Path(__file__).parent / "real_data" / "nfsqca_live.csv"
+    if live_path.exists():
+        try:
+            return pd.read_csv(live_path, encoding="utf-8")
+        except Exception:
+            pass
+    return None
 
 
 # =================================================================

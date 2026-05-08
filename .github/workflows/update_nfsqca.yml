@@ -1,0 +1,61 @@
+name: "Daily N-fsQCA Update"
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 06:00 UTC = 01:00 Ecuador (UTC-5)
+  workflow_dispatch:        # también se puede lanzar manualmente
+
+permissions:
+  contents: write
+
+jobs:
+  update-nfsqca:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install feedparser requests pandas numpy
+
+      - name: Run scraper + N-fsQCA
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          cd real_live
+          python -c "
+          import sys
+          sys.path.insert(0, '..')
+          from scraper_noticias import run as scrape
+          from nfsqca_auto import run as analyze
+
+          print('=== Scraping noticias ===')
+          articles = scrape(verbose=True)
+          print(f'Total articulos: {len(articles)}')
+
+          if not articles:
+              print('Sin articulos nuevos. Saliendo.')
+              sys.exit(0)
+
+          print('=== Analizando con 4 LLMs ===')
+          df = analyze(articles, verbose=True)
+          print('Completado.')
+          "
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add real_data/nfsqca_live.csv real_data/noticias_cache.json || true
+          git diff --staged --quiet || git commit -m "auto: N-fsQCA live update $(date -u +%Y-%m-%d)"
+          git push || echo "Nada que hacer"
